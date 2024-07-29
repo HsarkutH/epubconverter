@@ -17,6 +17,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System.IO;
 using EpubSharp;
+using PdfSharpTextExtractor;
 
 namespace EpubConverter
 {
@@ -43,11 +44,9 @@ namespace EpubConverter
         private void ConvertPdfToEpub(string pdfpath)
         {
             PdfDocument pdf = PdfReader.Open(pdfpath, PdfDocumentOpenMode.ReadOnly);
-            string textcontext = "";
-            foreach(PdfPage page in pdf.Pages)
-            {
-                textcontext += PdfTextExtracting.GetText();
-            }
+            string textContent = PdfSharpTextExtractor.Extractor.PdfToText(pdfpath);
+
+            EpubBook epub = new EpubBook();
         }
     }
 }
